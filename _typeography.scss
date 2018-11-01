@@ -1,0 +1,90 @@
+/* All Text */
+@mixin allText() {
+    font-family: $primary-font-family;
+}
+/* Heading Mixin */
+@mixin heading($margin) {
+    margin-top: $margin;
+    font-family: $title-font-family;
+    font-weight: $title-font-weight;
+}
+/* Subitlte Mixin */
+@mixin subTitle($heading-size, $heading-margin) {
+    font-size: 0.4 * $heading-size;
+    font-weight: normal;
+    color: lighten($title-color,25%);
+    padding-top: 0.5 * $heading-margin;
+} 
+
+h1,h2,h3,h4,h5,p,div,body {
+    @include allText();
+}
+// Base file assignments for titles
+h1 {
+    &.title { 
+        @include heading($title-margin-top);
+        font-size: $heading1-size;
+    }
+    &.subtitle {
+        @include subTitle($heading1-size, $title-margin-top);
+    }
+}
+h2 {
+    &.title { 
+        @include heading($title-margin-top);
+        font-size: $heading2-size;
+    }
+    &.subtitle {
+        @include subTitle($heading1-size, $title-margin-top);
+    }
+}
+h3 {
+    &.title { 
+        @include heading($title-margin-top);
+        font-size: $heading3-size
+    }
+    &.subtitle {
+        @include subTitle($heading2-size, $title-margin-top);
+    }
+}
+h4 {
+    &.title { 
+        @include heading($title-margin-top);
+        font-size: $heading4-size;
+    }
+    &.subtitle {
+        @include subTitle($heading3-size, $title-margin-top);
+    }
+}
+h5 {
+    &.title {
+        @include heading($title-margin-top);
+        font-size: $heading4-size;
+    }
+    &.subtitle {
+        @include subTitle($heading1-size, $title-margin-top);
+    }
+}
+
+@mixin blockquote() {
+    margin-top: 1rem;
+    display: block;
+    padding: 1rem;   
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    border-left: 2pt solid grey;
+    background-color: lighten(#000000, 95%); 
+}
+p {    
+    &.paragraph {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        display: block;        
+    }
+    &.quote {
+        @include blockquote();
+    }
+}
+blockquote {
+    @include blockquote();
+}

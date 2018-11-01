@@ -1,0 +1,173 @@
+
+@mixin flexBreak($px-width) {
+    @media screen and (max-width: $px-width) {
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: auto;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        display: block;   
+        padding-left: 0!important;
+        padding-right: 0!important;
+    }
+};
+@mixin offset($offset,$width) {
+    $o: (100*$offset)*1%;
+    $w: (100*$width)*1%;
+    $fs: $flex-grid-gutter;
+    
+    // $fs: 0.000001rem;
+    $padding: #{$o}+#{$fs};    
+    max-width: $o+$w;    
+    padding-left: calc(#{$o});
+    padding-left: -webkit-calc(#{$o} );
+    padding-left: -moz-calc(#{$o});
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+@mixin widthy($size) {
+    $w: (100*$size)*1%;
+    // Wacky Functions ~owo~
+    max-width: $w;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+@mixin square-col() {
+    &::before {
+
+    }
+}
+
+// flex cols!
+
+.row {
+    $p: &;
+    // position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: 0;
+    width: 100%;
+    // margin: $flex-grid-gutter;
+    justify-content:stretch;
+    // padding: $flex-grid-gutter;
+    &.start-center {
+        justify-content: center;
+    }
+    &.start-end {
+        justify-content: flex-end;
+    }
+    .col:first-child {
+        // padding-left: 0;
+    }
+    .col:last-child {
+        padding-right: 0;
+    }
+    .col {
+        -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+        box-sizing: border-box;         /* Opera/IE 8+ */
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: auto;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-right: $flex-grid-gutter;
+        padding-top: $flex-grid-gutter;
+        padding-bottom: $flex-grid-gutter;
+        // Breakpoints! 
+        &.sm {@include flexBreak($breakpoint-sm);}
+        &.md {@include flexBreak($breakpoint-md);}
+        &.lg {@include flexBreak($breakpoint-lg);}
+        &.xl {@include flexBreak($breakpoint-xl);}
+        @mixin offsetMan($size) {
+            &.offset-one{@include offset((1/12),$size);}
+            &.offset-two{@include offset((2/12),$size);}
+            &.offset-three{@include offset((3/12),$size);}
+            &.offset-four{@include offset((4/12),$size);}
+            &.offset-five{@include offset((5/12),$size);}
+            &.offset-six{@include offset((6/12),$size);}
+            &.offset-seven{@include offset((7/12),$size);}
+            &.offset-eight{@include offset((8/12),$size);}
+            &.offset-nine{@include offset((9/12),$size);}
+            &.offset-ten{@include offset((10/2),$size);}
+            &.offset-eleven{@include offset((11/12),$size);}
+        }
+        &.one {
+            $width: (1/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }
+        &.two {            
+            $width: (2/12);
+            @include widthy($width);
+            @include offsetMan($width);}
+        &.three {
+            $width: (3/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }
+        &.four { 
+            $width: (4/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }
+        &.five {
+            $width: (5/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }
+        &.six { 
+            $width: (6/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }
+        &.seven {
+            $width: (7/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }
+        &.eight {
+            $width: (8/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }
+        &.nine {
+            $width: (9/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }
+        &.ten {
+            $width: (10/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }
+        &.eleven {
+            $width: (11/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }
+        &.tweleve {
+            $width: (12/12);
+            @include widthy($width);
+            @include offsetMan($width);
+        }   
+        
+        // &.offset-one{@include offset((1/12));}
+        // &.offset-two{@include offset((2/12));}
+        // &.offset-three{@include offset((3/12));}
+        // &.offset-four{@include offset((4/12));}
+        // &.offset-five{@include offset((5/12));}
+        // &.offset-six{@include offset((6/12));}
+        // &.offset-seven{@include offset((7/12));}
+        // &.offset-eight{@include offset((8/12));}
+        // &.offset-nine{@include offset((9/12));}
+        // &.offset-ten{@include offset((10/2));}
+        // &.offset-eleven{@include offset((11/12));}
+
+        &.square {
+            @include square-col();
+        }
+    }
+}
